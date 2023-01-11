@@ -1,13 +1,12 @@
-import knex from '../../common/knex';
+import knex from '../../../knex/knex';
 import { Account } from './interface';
 
-async function getByID(id: number) {
+async function getByID(id: number) /* : Promise<Account> */ {
   console.log('api - account - getByID');
 
-  const query = knex<Account>('account').select(['account.*']).where('account.id', '=', id);
-  const [row] = await query;
+  const row = (await knex('account').select(['account.*']).where('account.id', id).first()) as unknown;
 
-  return row;
+  return row as Account;
 }
 
 export default getByID;

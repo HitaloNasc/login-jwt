@@ -1,7 +1,7 @@
 // global
 import bcrypt from 'bcryptjs';
 // local
-import knex from '../../common/knex';
+import knex from '../../../knex/knex';
 // entity
 import { Account } from './interface';
 import { _validateCreate } from './_validate-create';

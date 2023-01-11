@@ -6,5 +6,4 @@ export default {
   TYPE: {
     DEFAULT: 1,
   },
-  SALT: process.env.BCRYPT,
 };

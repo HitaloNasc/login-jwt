@@ -35,4 +35,16 @@ router.post('/singup', (request: Request, response: Response) => {
   handlerJson(response, promise);
 });
 
+router.post('/singin', (request: Request, response: Response) => {
+  console.log('route - account - singin');
+
+  const token = _.get(request, 'cookies.token', null);
+  const email = _.get(request, 'body.email', null);
+  const password = _.get(request, 'body.password', null);
+
+  const accountModel = new Account();
+  const promise = accountModel.singin({ token, email, password });
+  handlerJson(response, promise);
+});
+
 export { router, path };

@@ -1,6 +1,6 @@
 import { Errors } from '../../common/lib/http-exeption';
 import { Exemple } from './interface';
-import knex from '../../common/knex';
+import knex from '../../../knex/knex';
 
 async function list() {
   console.log('api - exemple - list');
