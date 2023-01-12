@@ -1,12 +1,13 @@
-import knex from '../../../knex/knex';
+// global
+// local
+// entity
+import { AccountController } from '.';
 import { Account } from './interface';
 
-async function getByID(id: number) /* : Promise<Account> */ {
+export async function getByID(this: AccountController, id: number) {
   console.log('api - account - getByID');
-
-  const row = (await knex('account').select(['account.*']).where('account.id', id).first()) as unknown;
-
+  
+  const row = (await this.knex('account').select(['account.*']).where('account.id', id).first()) as unknown;
+  
   return row as Account;
 }
-
-export default getByID;

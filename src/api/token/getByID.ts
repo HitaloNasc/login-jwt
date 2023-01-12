@@ -1,12 +1,13 @@
-import knex from '../../../knex/knex';
+// global
+// local
+// entity
+import { TokenController } from '.';
 import { Token } from './interface';
 
-async function getByID(id: number) {
+export async function getByID(this: TokenController, id: number) {
   console.log('api - token - getByID');
 
-  const row = (await knex('token').select(['token.*']).where('token.id', id).first()) as unknown;
+  const row = (await this.knex('token').select(['token.*']).where('token.id', id).first()) as unknown;
 
   return row as Token;
 }
-
-export default getByID;

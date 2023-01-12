@@ -1,27 +1,24 @@
 // global
 import bcrypt from 'bcryptjs';
-import jwt from 'jsonwebtoken';
 import { addDays } from 'date-fns';
 // local
-import TokenModel from '../token';
-// entity
-import ACCOUNT from './cosnts';
-import { Account } from './interface';
-import getByEmail from './getByEmail';
 import { Errors } from '../../common/lib/http-exeption';
+import { Jwt } from '../../common/lib/jwt';
+import { TokenController } from '../token';
+// entity
+import { AccountController } from '.';
+import { Account } from './interface';
 
-interface SinginProps {
-  token: string;
-  email: string;
-  password: string;
-}
-
-async function singin({ email, password }: SinginProps) {
+export async function singin(this: AccountController, { email, password }: { email: string; password: string }) {
   console.log('api - account - singin');
 
-  const account: Account = await getByEmail(email);
+  const account: Account = await this.getByEMAIL(email);
 
-  if (account.status === ACCOUNT.STATUS.INACTIVE) {
+  if (!account) {
+    throw Errors.UNAUTHORIZED();
+  }
+
+  if (account.status === this.STATUS.INACTIVE) {
     throw Errors.UNAUTHORIZED();
   }
 
@@ -30,18 +27,16 @@ async function singin({ email, password }: SinginProps) {
     throw Errors.UNAUTHORIZED();
   }
 
-  const secret = process.env.JWT_SECRET || '';
-  const expiresIn = `${process.env.JWT_EXPIRE_TIME}${process.env.JWT_EXPIRE_FORMAT}`;
-  const tokenHash = jwt.sign({ id: account.id, name: account.name, type: account.type }, secret, { expiresIn, algorithm: 'HS512' });
+  const jwt = new Jwt();
+  const { id, name, type } = account;
+  const token = jwt.create({ id: id!, name, type: type! });
 
-  const tokenModel = new TokenModel();
-  await tokenModel.create({
-    token: tokenHash,
+  const tokenController = new TokenController(this.knex);
+  await tokenController.create({
+    token,
     expires: addDays(new Date(), parseInt(process.env.JWT_EXPIRE_TIME!)),
     accountId: account.id,
   });
 
-  return { ...account, token: tokenHash };
+  return { ...account, token };
 }
-
-export default singin;

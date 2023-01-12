@@ -1,9 +1,18 @@
-import create from './create';
+// global
+import { Knex } from 'knex';
+// local
+// entity
+import { create } from './create';
+import { getByID } from './getByID';
 
-export default class Exemple {
-  create: Function;
+export class TokenController {
+  protected knex: Knex;
+  public create: Function;
+  public getByID: Function;
 
-  constructor() {
-    this.create = create;
+  constructor(knex: Knex) {
+    this.knex = knex;
+    this.create = create.bind(this);
+    this.getByID = getByID.bind(this);
   }
 }

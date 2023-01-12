@@ -1,18 +1,36 @@
-import singin from './singin';
-import singup from './singup';
-import getByID from './getByID';
-import getByEmail from './getByEmail';
+// global
+import { Knex } from 'knex';
+// local
+// entity
+import { _validateSingup } from './_validateSingup';
+import { singup } from './singup';
+import { singin } from './singin';
+import { getByID } from './getByID';
+import { getByEMAIL } from './getByEMAIL';
 
-export default class Exemple {
-  singin: Function;
-  singup: Function;
-  getByID: Function;
-  getByEmail: Function;
+export class AccountController {
+  protected knex: Knex;
+  protected _validateSingup: Function;
+  public singup: Function;
+  public singin: Function;
+  public getByID: Function;
+  public getByEMAIL: Function;
 
-  constructor() {
-    this.singin = singin;
-    this.singup = singup;
-    this.getByID = getByID;
-    this.getByEmail = getByEmail;
+  protected STATUS = {
+    ACTIVE: 1,
+    INACTIVE: 0,
+  };
+
+  protected TYPE = {
+    DEFAULT: 1,
+  };
+
+  constructor(knex: Knex) {
+    this.knex = knex;
+    this._validateSingup = _validateSingup.bind(this);
+    this.singup = singup.bind(this);
+    this.singin = singin.bind(this);
+    this.getByID = getByID.bind(this);
+    this.getByEMAIL = getByEMAIL.bind(this);
   }
 }

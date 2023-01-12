@@ -1,13 +1,13 @@
-import knex from '../../../knex/knex';
-import getByID from './getByID';
+// global
+// local
+// entity
+import { TokenController } from '.';
 import { Token } from './interface';
 
-async function create({ token, expires, accountId }: Token) {
+export async function create(this: TokenController, { token, expires, accountId }: Token) {
   console.log('api - token - create');
 
-  const [id] = await knex<Token>('token').insert({ token, expires, accountId });
+  const [id] = await this.knex<Token>('token').insert({ token, expires, accountId });
 
-  return await getByID(id);
+  return await this.getByID(id);
 }
-
-export default create;
