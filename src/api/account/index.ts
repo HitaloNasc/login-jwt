@@ -7,9 +7,10 @@ import { singup } from './singup';
 import { singin } from './singin';
 import { getByID } from './getByID';
 import { getByEMAIL } from './getByEMAIL';
+import { BaseController } from '../base-controller';
 
-export class AccountController {
-  protected knex: Knex;
+export class AccountController extends BaseController {
+  // protected knex: Knex;
   protected _validateSingup: Function;
   public singup: Function;
   public singin: Function;
@@ -25,8 +26,9 @@ export class AccountController {
     DEFAULT: 1,
   };
 
-  constructor(knex: Knex) {
-    this.knex = knex;
+  constructor(/* knex: Knex */) {
+    // this.knex = knex;
+    super();
     this._validateSingup = _validateSingup.bind(this);
     this.singup = singup.bind(this);
     this.singin = singin.bind(this);

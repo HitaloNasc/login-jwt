@@ -38,5 +38,5 @@ export async function singin(this: AccountController, { email, password }: { ema
     accountId: account.id,
   });
 
-  return { ...account, token };
+  return { name: account.name, email: account.email, type: account.type, token };
 }

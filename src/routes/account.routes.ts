@@ -2,7 +2,6 @@
 import Router, { Request, Response } from 'express';
 import _ from 'lodash';
 // local
-import knex from '../../knex/knex';
 import { Handler } from '../common/lib/handle';
 import { AccountController } from '../api/account';
 
@@ -14,7 +13,7 @@ router.get('/:id', (request: Request, response: Response) => {
 
   const id: number = parseInt(_.get(request, 'params.id', null)!);
 
-  const promise = new AccountController(knex).getByID(id);
+  const promise = new AccountController().getByID(id);
   new Handler().json(response, promise);
 });
 
@@ -25,7 +24,7 @@ router.post('/singup', (request: Request, response: Response) => {
   const email = _.get(request, 'body.email', null);
   const password = _.get(request, 'body.password', null);
 
-  const promise = new AccountController(knex).singup({ name, email, password });
+  const promise = new AccountController().singup({ name, email, password });
   new Handler().json(response, promise);
 });
 
@@ -35,7 +34,7 @@ router.post('/singin', (request: Request, response: Response) => {
   const email = _.get(request, 'body.email', null);
   const password = _.get(request, 'body.password', null);
 
-  const promise = new AccountController(knex).singin({ email, password });
+  const promise = new AccountController().singin({ email, password });
   new Handler().json(response, promise);
 });
 
