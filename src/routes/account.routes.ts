@@ -15,7 +15,6 @@ router.get('/:id', (request: Request, response: Response) => {
   const id: number = parseInt(_.get(request, 'params.id', null)!);
 
   const promise = new AccountController(knex).getByID(id);
-
   new Handler().json(response, promise);
 });
 
@@ -27,7 +26,6 @@ router.post('/singup', (request: Request, response: Response) => {
   const password = _.get(request, 'body.password', null);
 
   const promise = new AccountController(knex).singup({ name, email, password });
-
   new Handler().json(response, promise);
 });
 
@@ -38,7 +36,6 @@ router.post('/singin', (request: Request, response: Response) => {
   const password = _.get(request, 'body.password', null);
 
   const promise = new AccountController(knex).singin({ email, password });
-
   new Handler().json(response, promise);
 });
 

@@ -1,4 +1,6 @@
+// global
 import jwt from 'jsonwebtoken';
+// local
 import { Errors } from './http-exeption';
 
 export class Jwt {
