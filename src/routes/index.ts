@@ -1,6 +1,8 @@
+// global
 import fs from 'fs';
 import Path from 'path';
 import { Express } from 'express';
+// local
 
 const routes = (app: Express) => {
   const rootPath = __dirname;

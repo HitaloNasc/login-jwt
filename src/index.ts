@@ -1,8 +1,7 @@
-// import dotenv from 'dotenv';
+// global
 import 'dotenv/config';
+// local
 import app from './app';
-
-// dotenv.config();
 
 const PORT = parseInt(process.env.PORT!) || 5555;
 

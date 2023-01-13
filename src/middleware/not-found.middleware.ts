@@ -1,4 +1,6 @@
+// global
 import { Request, Response, NextFunction } from 'express';
+// local
 
 export const notFoundHandler = (request: Request, response: Response, next: NextFunction) => {
   response
