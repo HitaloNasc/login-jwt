@@ -18,8 +18,8 @@ export class Helper {
     // special caracter
     const specialRegex = /[!|@|#|$|%|^|&|*|(|)|-|_]/;
     const hasSpecialCaracter = specialRegex.test(password);
-    //
-    const isValidPassword = hasCapitalLetter || hasLowerCaseLatter || hasNumber || hasSpecialCaracter;
+    
+    const isValidPassword = hasCapitalLetter && hasLowerCaseLatter && hasNumber && hasSpecialCaracter;
     return isValidPassword;
   };
 }

@@ -1,8 +1,7 @@
 // global
-import { Knex } from 'knex';
 // local
 import knex from '../../knex/knex';
 
-export class BaseController {
+export class BaseModel {
   protected knex = knex;
 }

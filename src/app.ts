@@ -6,6 +6,7 @@ import helmet from 'helmet';
 // local
 import routes from './routes';
 import { notFoundHandler } from './middleware/not-found.middleware';
+import { errorHandler } from './middleware/handler-error.middleware';
 
 const app = express();
 
@@ -21,5 +22,6 @@ app.use(cors());
 app.use(helmet());
 routes(app);
 app.use(notFoundHandler);
+app.use(errorHandler);
 
 export default app;
