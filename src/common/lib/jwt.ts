@@ -17,7 +17,7 @@ export class Jwt {
     try {
       jwt.verify(token, this.secret);
     } catch (err) {
-      throw Errors.UNAUTHORIZED();
+      throw Errors.UNAUTHORIZED([{ key: 'jwt__invalid_token', data: { token } }]);
     }
   };
 }

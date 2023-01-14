@@ -15,7 +15,7 @@ export class HttpException extends Error {
 }
 
 export const Errors = {
-  UNAUTHORIZED: () => new HttpException(401, null, 'unauthorized'),
+  UNAUTHORIZED: (err: object[]) => new HttpException(401, err, 'unauthorized'),
   FORBIDDEN: () => new HttpException(403, null, 'forbidden'),
   NOT_FOUND: (err: object[]) => new HttpException(404, err, 'not_found'),
   PRECONDITION_FAILED: (err: object[]) => new HttpException(412, err, 'precondition_failed'),

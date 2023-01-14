@@ -1,17 +1,16 @@
 // global
-import { Knex } from 'knex';
 // local
+import { BaseModel } from '../base-model';
 // entity
 import { create } from './create';
 import { getByID } from './getByID';
 
-export class TokenController {
-  protected knex: Knex;
+export class TokenModel extends BaseModel {
   public create: Function;
   public getByID: Function;
 
-  constructor(knex: Knex) {
-    this.knex = knex;
+  constructor() {
+    super();
     this.create = create.bind(this);
     this.getByID = getByID.bind(this);
   }
